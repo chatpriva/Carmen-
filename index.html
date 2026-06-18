@@ -1,11 +1,80 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página Inicial</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Wi-Fi Debugger</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        #status {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
-  
+    <h1>Free Fire Wi-Fi Debugger</h1>
+    
+    <div class="input-group">
+        <label for="code">Código de Pareamento:</label>
+        <input type="text" id="code" placeholder="Digite o código de pareamento">
+    </div>
+    
+    <button onclick="sendCode()">Enviar Código</button>
+    
+    <div id="status"></div>
+
+    <script>
+        function sendCode() {
+            const code = document.getElementById('code').value;
+            if (!code) {
+                updateStatus('Por favor, insira um código de pareamento.');
+                return;
+            }
+
+            // Simulação de envio de código via Wi-Fi
+            fetch('/api/send-code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({code}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                updateStatus(`Código enviado com sucesso! Status: ${data.status}`);
+            })
+            .catch(error => {
+                updateStatus(`Erro ao enviar código: ${error.message}`);
+            });
+        }
+
+        function updateStatus(message) {
+            document.getElementById('status').textContent = message;
+        }
+    </script>
 </body>
 </html>
