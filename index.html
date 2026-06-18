@@ -656,40 +656,4 @@ function updateExtraBtn() {
     info.textContent = 'Sem extras restantes';
     info.style.color = '#ff7675';
     info.style.borderColor = 'rgba(255,118,117,0.3)';
-    info.style.background = 'rgba(255,118,117,0.1)';
-  } else {
-    info.textContent = extraTubesLeft + (extraTubesLeft === 1 ? ' extra disponível' : ' extras disponíveis');
-    info.style.color = '#00cec9';
-    info.style.borderColor = 'rgba(0,206,201,0.3)';
-    info.style.background = 'rgba(0,206,201,0.1)';
-  }
-}
-
-function updateLevelBadge() {
-  document.getElementById('level-badge').textContent = 'Nível ' + (currentLevel + 1);
-}
-
-function updateMoves() {
-  document.getElementById('moves-badge').textContent = 'Movimentos: ' + moves;
-}
-
-// ── CONFETTI ─────────────────────────────────────────────────────────────────
-function spawnConfetti() {
-  const colors = ['#ffd700','#ff6b6b','#74b9ff','#55efc4','#a29bfe','#fd79a8','#fdcb6e'];
-  for (let i = 0; i < 80; i++) {
-    const el = document.createElement('div');
-    el.className = 'confetti';
-    el.style.left = Math.random() * 100 + 'vw';
-    el.style.top = '-20px';
-    el.style.background = colors[Math.floor(Math.random() * colors.length)];
-    el.style.width = (8 + Math.random() * 8) + 'px';
-    el.style.height = (8 + Math.random() * 8) + 'px';
-    el.style.animationDuration = (1.5 + Math.random() * 2) + 's';
-    el.style.animationDelay = (Math.random() * 0.8) + 's';
-    document.body.appendChild(el);
-    el.addEventListener('animationend', () => el.remove());
-  }
-}
-</script>
-</body>
-</html>
+    info.style.backgr
