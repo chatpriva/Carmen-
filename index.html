@@ -1,79 +1,100 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Fire Wi-Fi Debugger</title>
+    <title>Free Fire XIT</title>
+    <script src="https://cdn.jsdelivr.net/npm/frida@latest"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-        #status {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f0f0f0;
-        }
+        body { font-family: Arial; text-align: center; padding: 20px; }
+        button { padding: 10px 20px; margin: 10px; }
     </style>
 </head>
 <body>
-    <h1>Free Fire Wi-Fi Debugger</h1>
+    <h1>XIT Free Fire</h1>
     
-    <div class="input-group">
-        <label for="code">Código de Pareamento:</label>
-        <input type="text" id="code" placeholder="Digite o código de pareamento">
+    <div id="controls">
+        <button onclick="openGame()">Abrir Free Fire</button>
+        <button onclick="toggleXIT()">Ativar XIT</button>
     </div>
     
-    <button onclick="sendCode()">Enviar Código</button>
-    
-    <div id="status"></div>
+    <div id="status" style="margin-top: 20px;">
+        Status: Desativado
+    </div>
 
     <script>
-        function sendCode() {
-            const code = document.getElementById('code').value;
-            if (!code) {
-                updateStatus('Por favor, insira um código de pareamento.');
-                return;
-            }
+        let active = false;
+        let session;
+        let gameInterval;
 
-            // Simulação de envio de código via Wi-Fi
-            fetch('/api/send-code', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({code}),
-            })
-            .then(response => response.json())
-            .then(data => {
-                updateStatus(`Código enviado com sucesso! Status: ${data.status}`);
-            })
-            .catch(error => {
-                updateStatus(`Erro ao enviar código: ${error.message}`);
-            });
+        // Função para abrir o Free Fire
+        async function openGame() {
+            try {
+                const gameIntent = "android.intent.action.MAIN";
+                const gamePackage = "com.dts.freefire";
+                const gameActivity = "com.dts.freefire.MainActivity";
+                
+                // Tenta abrir o jogo
+                await fetch('http://localhost:8080/open-game?intent=' + encodeURIComponent(gameIntent) + '&package=' + encodeURIComponent(gamePackage) + '&activity=' + encodeURIComponent(gameActivity));
+                
+                // Aguarda o jogo abrir
+                gameInterval = setInterval(() => {
+                    checkGameRunning();
+                }, 1000);
+            } catch (err) {
+                console.error('Erro ao abrir jogo:', err);
+            }
         }
 
-        function updateStatus(message) {
-            document.getElementById('status').textContent = message;
+        // Função para verificar se o jogo está rodando
+        function checkGameRunning() {
+            // Verificar se o processo está ativo
+            if (isProcessRunning('com.dts.freefire')) {
+                clearInterval(gameInterval);
+                document.getElementById('status').textContent = 'Status: Jogo Aberto';
+            }
+        }
+
+        // Função para ativar/desativar XIT
+        async function toggleXIT() {
+            active = !active;
+            
+            if (active) {
+                try {
+                    document.getElementById('status').textContent = 'Status: Ativando...';
+                    
+                    // Conectar ao jogo
+                    const device = await frida.getUsbDevice();
+                    session = await device.attach('com.dts.freefire');
+                    
+                    // Script para hook na mira
+                    const script = await session.createScript(`
+                        Interceptor.attach(Module.findExportByName(null, "mirar"), {
+                            onEnter: function(args) {
+                                var target = this.args[0];
+                                var head_pos = target.getHeadPosition();
+                                var aim = this.args[1];
+                                aim.setAngle(head_pos.x, head_pos.y);
+                            }
+                        });
+                    `);
+                    
+                    await script.load();
+                    document.getElementById('status').textContent = 'Status: Ativado';
+                } catch (err) {
+                    console.error('Erro:', err);
+                    document.getElementById('status').textContent = 'Status: Erro ao ativar';
+                }
+            } else {
+                if (session) {
+                    await session.detach();
+                    document.getElementById('status').textContent = 'Status: Desativado';
+                }
+            }
+        }
+
+        // Função para verificar se processo está rodando
+        function isProcessRunning(packageName) {
+            // Implementar verificação real do processo
+            return true;
         }
     </script>
 </body>
