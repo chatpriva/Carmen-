@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CG Soluções Gráficas — Design, Artes e Desenvolvimento Web Premium</title>
+    <meta name="description" content="CG Soluções Gráficas: artes para redes sociais, identidade visual e desenvolvimento de sites profissionais. Atendimento rápido, design exclusivo e resultado premium.">
+    
+    <!-- Google Fonts para Tipografia Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* RESET & VARIAVEIS */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --bg-dark: #0d0d11;
+            --bg-card-dark: #14141c;
+            --bg-card-light: #faf8f5;
+            --text-gold: #e2b96b;
+            --gold-gradient: linear-gradient(135deg, #f3d493 0%, #c49646 50%, #a1742a 100%);
+            --text-light: #f5f5f7;
+            --text-muted: #8e8e93;
+            --text-dark: #111115;
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding: 40px 20px;
+        }
+
+        /* CONTAINER PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* HEADER / INTRODUCAO */
+        .header-section {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .header-section h1 {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            color: transparent;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .header-section p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* GRID DOS PLANOS */
+        .pricing-grid {
+            display: table;
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 30px 0;
+            margin-top: 40px;
+        }
+
+        .pricing-card-wrapper {
+            display: table-cell;
+            width: 33.333%;
+            vertical-align: top;
+        }
+
+        /* O CARD CORRIGIDO E MELHORADO */
+        .card {
+            background-color: var(--bg-card-dark);
+            border-radius: 24px;
+            overflow: visible; /* CRUCIAL: Impede que a etiqueta "Mais Popular" seja cortada */
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(196, 150, 70, 0.1);
+            border-color: rgba(196, 150, 70, 0.2);
+        }
+
+        /* CARD PREMIUM / INTERMEDIARIO (ESTILO IGUAL AO DO SEU PRINT) */
+        .card.featured {
+            background-color: var(--bg-card-light);
+            color: var(--text-dark);
+            margin-top: -10px; /* Destaca levemente o tamanho */
+        }
+
+        /* ETIQUETA MAIS POPULAR - TOTALMENTE CORRIGIDA */
+        .badge {
+            position: absolute;
+            top: -16px; /* Ajustado para flutuar perfeitamente no topo */
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-gradient);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 8px 24px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(196, 150, 70, 0.4);
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        /* SECAO SUPERIOR DO CARD */
+        .card-header {
+            padding: 45px 30px 30px 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .card.featured .card-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .card-header h2 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .card:not(.featured) .card-header h2 {
+            color: var(--text-light);
+        }
+        
+        .card.featured .card-header h2 {
+            color: var(--text-dark);
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold-gradient);
+            margin: 15px auto 0 auto;
+        }
+
+        /* CORPO DOS BENEFICIOS */
+        .card-body {
+            padding: 35px 35px;
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+
+        .card.featured .card-body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .features-list li {
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            display: block;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        /* Diamante Dourado Customizado do seu Print */
+        .features-list li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--text-gold);
+            font-size: 1rem;
+        }
+
+        /* SECAO DE PRECO E BOTAO */
+        .card-footer {
+            padding: 35px 30px 40px 30px;
+            text-align: center;
+        }
+
+        .price {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .card.featured .price {
+            color: var(--text-dark);
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-family: var(--font-body);
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* BOTAO PREMIUM COM DEGRADE */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px 30px;
+            background: var(--gold-gradient);
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(196, 150, 70, 0.2);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(196, 150, 70, 0.4);
+        }
+
+        .card:not(.featured) .btn {
+            background: transparent;
+            color: var(--text-gold);
+            border: 1px solid var(--text-gold);
+        }
+
+        .card:not(.featured) .btn:hover {
+            background: var(--gold-gradient);
+            color: #000;
+        }
+
+        /* RESPONSIVIDADE PARA CELULAR */
+        @media (max-width: 768px) {
+            .pricing-grid {
+                display: block;
+            }
+            .pricing-card-wrapper {
+                display: block;
+                width: 100%;
+                margin-bottom: 50px;
+            }
+            .card.featured {
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="header-section">
+            <h1>Pacotes de Artes</h1>
+            <p>Escolha o plano ideal para manter suas redes sociais sempre ativas, com design exclusivo e cronograma de postagens.</p>
+        </header>
+
+        <div class="pricing-grid">
+            
+            <!-- PLANO INICIAL -->
+            <div class="pricing-card-wrapper">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>PACOTE INICIAL</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li>5 Artes por mês.</li>
+                            <li>Feed profissional.</li>
+                            <li>Capa básica.</li>
+                            <li>Suporte padrão.</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <div class="price">R$ 120<span>,00</span></div>
+                        <a href="#" class="btn">Começar agora</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PLANO INTERMEDIARIO (O DO SEU PRINT - CORRIGIDO) -->
+            <div class="pricing-card-wrapper">
+                <div class="card featured">
+                    <div class="badge">Mais Popular</div>
+                    <div class="card-header">
+                        <h2>PACOTE INTERMEDIÁRIO</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li>15 Artes por mês.</li>
+                            <li>Story e feed.</li>
+                            <li>Capa para destaque.</li>
+                            <li>Mais revisões.</li>
+                            <li>Cronograma de postagens.</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <div class="price">R$ 250<span>,00</span></div>
+                        <a href="#" class="btn">Começar agora</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PLANO AVANCADO -->
+            <div class="pricing-card-wrapper">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>PACOTE PREMIUM</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li>30 Artes por mês.</li>
+                            <li>Story, Feed e Reels.</li>
+                            <li>Identidade completa.</li>
+                            <li>Revisões ilimitadas.</li>
+                            <li>Cronograma + Relatório.</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <div class="price">R$ 480<span>,00</span></div>
+                        <a href="#" class="btn">Começar agora</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
