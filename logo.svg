@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 500" fill="none">
+  <defs>
+    <linearGradient id="goldGrad" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#f8e9ac"/>
+      <stop offset="35%" stop-color="#d4af37"/>
+      <stop offset="70%" stop-color="#b8862a"/>
+      <stop offset="100%" stop-color="#8a6a1e"/>
+    </linearGradient>
+    <linearGradient id="goldGradSoft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8c975"/>
+      <stop offset="100%" stop-color="#9c7a1f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- borboleta -->
+  <g transform="translate(210,95)" stroke="url(#goldGradSoft)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-4,4 C-18,-22 -46,-40 -60,-24 C-72,-10 -58,14 -30,20 C-16,23 -8,16 -4,4 Z"/>
+    <path d="M4,4 C18,-24 48,-44 64,-26 C76,-10 60,16 32,22 C16,25 8,16 4,4 Z"/>
+    <path d="M-3,8 C-14,22 -30,34 -22,44 C-15,52 0,46 4,28 Z"/>
+    <path d="M3,8 C14,22 30,34 22,44 C15,52 0,46 -4,28 Z"/>
+    <path d="M0,-4 C-2,4 -2,20 0,50 C2,20 2,4 0,-4 Z" stroke-width="1.4"/>
+    <path d="M0,-2 C-6,-10 -12,-13 -16,-11"/>
+    <path d="M0,-2 C6,-10 12,-13 16,-11"/>
+  </g>
+
+  <!-- monograma C -->
+  <path d="M225 154
+           C 150 154 95 213 95 289
+           C 95 365 150 424 225 424"
+        stroke="url(#goldGrad)" stroke-width="26" fill="none" stroke-linecap="round"/>
+
+  <!-- monograma G -->
+  <path d="M255 197
+           C 320 197 368 244 368 306
+           C 368 368 320 415 258 415
+           C 200 415 158 375 158 318
+           C 158 268 196 232 244 232
+           C 278 232 300 250 300 250
+           L 300 300
+           L 262 300"
+        stroke="url(#goldGrad)" stroke-width="26" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="210" y="466" text-anchor="middle" font-family="'Poppins', Arial, sans-serif" font-size="26" font-weight="500" letter-spacing="9" fill="url(#goldGradSoft)">SOLUÇÕES GRÁFICAS</text>
+</svg>
