@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CG Delivery — Site Privado para Lojistas · R$ 29,90/mês</title>
+  <meta name="description" content="Alugue um site privado exclusivo para sua loja por R$ 29,90/mês. Painel completo, pedidos, produtos e sistema real.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta name="theme-color" content="#08070a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F7F8FB;
+      --surface: #FFFFFF;
+      --border: #E5E7EF;
+      --ink: #111827;
+      --ink-soft: #6B7280;
+      --ink-faint: #9CA3AF;
+      --primary: #4338CA;
+      --primary-dark: #3730A3;
+      --primary-light: #EEF2FF;
+      --success: #059669;
+      --success-bg: #ECFDF5;
+      --warning: #D97706;
+      --warning-bg: #FFFBEB;
+      --danger: #DC2626;
+      --radius: 14px;
+      --shadow: 0 4px 24px rgba(17, 24, 39, 0.06);
+      --shadow-lg: 0 12px 40px rgba(17, 24, 39, 0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== HEADER / HERO ===== */
+    .hero {
+      background: linear-gradient(160deg, #312E81 0%, #4338CA 45%, #6366F1 100%);
+      color: #fff;
+      padding: 28px 20px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .nav {
+      max-width: 1080px;
+      margin: 0 auto 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo span {
+      background: rgba(255,255,255,0.18);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .nav-links { display: flex; gap: 8px; }
+    .nav-links a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 9px;
+      transition: background .2s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.12); }
+
+    .hero-content {
+      max-width: 1080px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 4.5vw, 42px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.8px;
+      margin-bottom: 16px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, #A5B4FC, #C7D2FE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 16.5px;
+      opacity: 0.92;
+      max-width: 480px;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+    .preco-destaque {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      background: rgba(0,0,0,0.2);
+      padding: 10px 18px;
+      border-radius: 12px;
+      margin-bottom: 28px;
+    }
+    .preco-destaque .valor {
+      font-size: 28px;
+      font-weight: 800;
+    }
+    .preco-destaque .periodo {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14.5px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s, background .15s;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-branco {
+      background: #fff;
+      color: var(--primary);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    .btn-branco:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .btn-outline-branco {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.5);
+    }
+    .btn-outline-branco:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+    .hero-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      opacity: 0.95;
+    }
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      line-height: 1.4;
+    }
+    .feature-list li::before {
+      content: '✓';
+      background: rgba(255,255,255,0.2);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 64px 20px;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 5px 12px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .section-sub {
+      color: var(--ink-soft);
+      font-size: 16px;
+      max-width: 560px;
+      margin-bottom: 36px;
+    }
+
+    /* ===== O QUE É ===== */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+    .card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .preco-box {
+      background: linear-gradient(135deg, #312E81, #4338CA);
+      color: #fff;
+      border-radius: 20px;
+      padding: 32px;
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 32px;
+      align-items: center;
+      box-shadow: var(--shadow-lg);
+    }
+    .preco-box .grande {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .preco-box .grande span {
+      font-size: 20px;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+    .preco-box ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+    }
+    .preco-box li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+    .preco-box li::before {
+      content: '✓';
+      font-weight: 700;
+      color: #A5B4FC;
+    }
+
+    /* ===== COMO FUNCIONA / ANIMAÇÕES ===== */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .code-window {
+      background: #1E1B4B;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .code-header {
+      background: #312E81;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .code-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .code-dot.r { background: #F87171; }
+    .code-dot.y { background: #FBBF24; }
+    .code-dot.g { background: #34D399; }
+    .code-title {
+      margin-left: 8px;
+      font-size: 12px;
+      color: #A5B4FC;
+      font-weight: 600;
+    }
+    .code-body {
+      padding: 18px 20px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: #E0E7FF;
+      min-height: 180px;
+    }
+    .code-body .cmt { color: #818CF8; }
+    .code-body .key { color: #C4B5FD; }
+    .code-body .str { color: #6EE7B7; }
+    .code-body .num { color: #FCD34D; }
+    .typing {
+      border-right: 2px solid #A5B4FC;
+      animation: blink 0.8s step-end infinite;
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    .anim-line {
+      opacity: 0;
+      animation: fadeInLine 0.4s forwards;
+    }
+    @keyframes fadeInLine {
+      to { opacity: 1; }
+    }
+
+    .mock-screen {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .mock-bar {
+      background: var(--bg);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mock-bar .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D1D5DB;
+    }
+    .mock-content {
+      padding: 16px;
+    }
+    .mock-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      background: #FAFAFC;
+    }
+    .mock-img {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #C7D2FE, #A5B4FC);
+      flex-shrink: 0;
+    }
+    .mock-info { flex: 1; }
+    .mock-info strong { display: block; font-size: 13px; }
+    .mock-info span { font-size: 11.5px; color: var(--ink-soft); }
+    .mock-badge {
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--success-bg);
+      color: var(--success);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    /* ===== DEMO INTERNA ===== */
+    .demo-section {
+      background: #F0F1F7;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 0;
+    }
+    .demo-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .aviso-demo {
+      background: var(--warning-bg);
+      border: 1.5px solid #FCD34D;
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 28px;
+      font-size: 13.5px;
+      color: #92400E;
+    }
+    .aviso-demo strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* Demo panel styles (simplified real panel) */
+    .demo-painel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .demo-topo {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .demo-topo h2 {
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .demo-topo p {
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-top: 2px;
+    }
+    .demo-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+    .demo-abas {
+      display: flex;
+      gap: 6px;
+      padding: 14px 16px 0;
+      overflow-x: auto;
+      background: var(--bg);
+    }
+    .demo-aba {
+      flex-shrink: 0;
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .15s;
+    }
+    .demo-aba.ativa {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .demo-body {
+      padding: 20px;
+      background: var(--bg);
+      min-height: 380px;
+    }
+    .demo-secao { display: none; }
+    .demo-secao.ativa { display: block; }
+
+    .demo-bloco {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .demo-bloco h3 {
+      font-size: 14.5px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .demo-bloco .sub {
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-bottom: 14px;
+    }
+    .demo-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      margin: 12px 0 5px;
+    }
+    .demo-label:first-child { margin-top: 0; }
+    .demo-input, .demo-select, .demo-textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 13.5px;
+      color: var(--ink);
+      background: var(--bg);
+      outline: none;
+    }
+    .demo-input:focus, .demo-select:focus, .demo-textarea:focus {
+      border-color: var(--primary);
+      background: #fff;
+    }
+    .demo-textarea { min-height: 70px; resize: vertical; }
+    .demo-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .demo-btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .demo-btn-primario {
+      background: var(--primary);
+      color: #fff;
+    }
+    .demo-btn-primario:hover { background: var(--primary-dark); }
+    .demo-btn-fantasma {
+      background: var(--bg);
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+    .demo-btn-bloco { width: 100%; margin-top: 14px; }
+
+    .demo-produto {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      background: #FAFAFC;
+    }
+    .demo-produto img, .demo-produto .placeholder-img {
+      width: 46px;
+      height: 46px;
+      border-radius: 9px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #C7D2FE, #818CF8);
+    }
+    .demo-produto-info { flex: 1; min-width: 0; }
+    .demo-produto-info .nome { font-weight: 600; font-size: 13.5px; }
+    .demo-produto-info .detalhe { font-size: 11.5px; color: var(--ink-soft); }
+    .demo-acoes { display: flex; gap: 6px; }
+    .demo-icone {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+    .demo-icone:hover { color: var(--danger); border-color: var(--danger); }
+
+    .demo-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #111827;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      transition: all .3s;
+      z-index: 100;
+    }
+    .demo-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Preview loja */
+    .preview-loja {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .preview-header {
+      background: linear-gradient(135deg, #2F6B4F, #3D8B66);
+      color: #fff;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .preview-header h4 { font-size: 18px; font-weight: 800; }
+    .preview-header p { font-size: 12px; opacity: 0.9; margin-top: 4px; }
+    .preview-produtos {
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+    .preview-item {
+      display: flex;
+      gap: 12px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .preview-item .img {
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #D1FAE5, #6EE7B7);
+      flex-shrink: 0;
+    }
+    .preview-item strong { font-size: 13.5px; display: block; }
+    .preview-item span { font-size: 12px; color: var(--ink-soft); }
+    .preview-item .preco { font-weight: 700; color: #2F6B4F; margin-top: 4px; font-size: 14px; }
+
+    /* ===== CONTATO ===== */
+    .contato-section {
+      text-align: center;
+      padding-bottom: 80px;
+    }
+    .whatsapp-btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      padding: 16px 26px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(37, 211, 102, 0.4);
+    }
+    .btn-whatsapp svg { width: 22px; height: 22px; fill: currentColor; }
+    .btn-whatsapp small {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 500;
+      opacity: 0.9;
+      margin-top: 1px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #111827;
+      color: #9CA3AF;
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 13px;
+    }
+    footer strong { color: #E5E7EB; }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 860px) {
+      .hero-content { grid-template-columns: 1fr; gap: 32px; }
+      #o-que-e > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+      .hero-card { order: -1; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .preco-box { grid-template-columns: 1fr; }
+      .preco-box ul { grid-template-columns: 1fr; }
+      .demo-grid { grid-template-columns: 1fr; }
+      .demo-grid-2 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding-bottom: 48px; }
+      .preco-destaque .valor { font-size: 24px; }
+      .whatsapp-btns { flex-direction: column; align-items: stretch; }
+      .btn-whatsapp { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HERO ========== -->
+  <header class="hero">
+    <div class="nav">
+      <div class="logo">
+        <a href="index.html" style="display:flex;align-items:center;gap:8px;color:inherit;text-decoration:none">
+          <img src="logo.png" alt="CG" style="width:36px;height:36px;object-fit:contain;border-radius:8px;">
+          CG Delivery
+        </a>
+        <span>Site Privado</span>
+      </div>
+      <div class="nav-links">
+        <a href="#o-que-e">O que é</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#demo">Demonstração</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <div>
+        <div class="hero-badge">
+          🚀 Plataforma completa para lojistas
+        </div>
+        <h1>Seu site privado de delivery por <em>R$ 29,90/mês</em></h1>
+        <p class="hero-sub">
+          Site exclusivo só da sua loja + painel de controle completo. 
+          Seus clientes acessam direto ou instalam como app (PWA) com um clique o seu link. Sistema real, com APIs e funcionalidades de verdade.
+        </p>
+        <div class="preco-destaque">
+          <span class="valor">R$ 29,90</span>
+          <span class="periodo">/mês · sem comissão por venda</span>
+        </div>
+        <div class="hero-ctas">
+          <a href="#contato" class="btn btn-branco">Quero meu site agora</a>
+          <a href="#demo" class="btn btn-outline-branco">Ver demonstração</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>O que você recebe</h3>
+        <ul class="feature-list">
+          <li>Site privado exclusivo da sua loja</li>
+          <li>Painel completo de gerenciamento</li>
+          <li><strong>PWA para o cliente</strong> — app instalável com 1 clique (sem precisar abrir link) · converte mais vendas</li>
+          <li><strong>PWA do painel do lojista</strong> — instale e gerencie rápido no celular</li>
+          <li>Cadastro de produtos, categorias e horários</li>
+          <li>Recebimento e gestão de pedidos · sem comissão</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== O QUE É ========== -->
+  <section id="o-que-e">
+    <div class="section-label">O serviço</div>
+    <h2 class="section-title">Site privado + painel completo</h2>
+    <p class="section-sub">
+      Você aluga um site exclusivo só da sua loja. Seus clientes entram pelo seu link privado. 
+      Você controla tudo pelo painel.
+    </p>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🔒</div>
+        <h3>Site privado</h3>
+        <p>Link exclusivo da sua loja. Não aparece junto com outras lojas. Só seus clientes acessam.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚙️</div>
+        <h3>Painel real</h3>
+        <p>Gerencie produtos, horários, frete, promoções e pedidos. Sistema completo com APIs funcionando.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💰</div>
+        <h3>R$ 29,90/mês</h3>
+        <p>Valor fixo. Sem taxa por pedido. Sem comissão. Você paga só a mensalidade do site.</p>
+      </div>
+    </div>
+
+    
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px">
+      <div style="background:#EEF2FF;border:1px solid #C7D2FE;border-radius:14px;padding:22px;position:relative">
+        <span style="position:absolute;top:12px;right:12px;font-size:10px;font-weight:800;letter-spacing:1px;background:#4338CA;color:#fff;padding:3px 8px;border-radius:6px">PWA</span>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:8px;padding-right:48px">App para o cliente da loja</h3>
+        <p style="font-size:13.5px;color:#6B7280;line-height:1.5">
+          O cliente instala a loja no celular com <strong>um clique</strong>. Não precisa ficar entrando em link —
+          abre como aplicativo. Facilita o pedido e <strong>aumenta a conversão de vendas</strong> para o lojista.
+        </p>
+      </div>
+      <div style="background:#EEF2FF;border:1px solid #C7D2FE;border-radius:14px;padding:22px;position:relative">
+        <span style="position:absolute;top:12px;right:12px;font-size:10px;font-weight:800;letter-spacing:1px;background:#4338CA;color:#fff;padding:3px 8px;border-radius:6px">PWA</span>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:8px;padding-right:48px">Painel do lojista instalável</h3>
+        <p style="font-size:13.5px;color:#6B7280;line-height:1.5">
+          O painel também é <strong>PWA</strong>: você instala no celular ou no computador e gerencia
+          pedidos, produtos e horários com acesso rápido, como um app nativo.
+        </p>
+      </div>
+    </div>
+
+    <div class="preco-box">
+      <div>
+        <div style="font-size:14px;opacity:0.85;margin-bottom:6px;">Mensalidade</div>
+        <div class="grande">R$ 29,90 <span>/mês</span></div>
+        <div style="margin-top:12px;font-size:14px;opacity:0.9;">Site privado · Painel completo · Sem comissão</div>
+      </div>
+      <ul>
+        <li>Site exclusivo da sua loja</li>
+        <li>Painel de controle completo</li>
+        <li>PWA para clientes (app 1 clique)</li>
+        <li>PWA do painel do lojista</li>
+        <li>Produtos e categorias ilimitados</li>
+        <li>Horários de funcionamento</li>
+        <li>Gestão de pedidos</li>
+        <li>Personalização visual</li>
+        <li>Sistema com APIs reais</li>
+        <li>Suporte via WhatsApp</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== COMO FUNCIONA ========== -->
+  <section id="como-funciona">
+    <div class="section-label">Funcionamento</div>
+    <h2 class="section-title">Como a plataforma trabalha</h2>
+    <p class="section-sub">
+      Não é só um visual bonito. É um sistema completo com backend, APIs e painel operante.
+    </p>
+
+    <div class="demo-grid">
+      <!-- Code animation -->
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dot r"></div>
+          <div class="code-dot y"></div>
+          <div class="code-dot g"></div>
+          <span class="code-title">api · pedidos em tempo real</span>
+        </div>
+        <div class="code-body" id="codeAnim">
+          <div class="anim-line" style="animation-delay:0.2s"><span class="cmt">// Novo pedido recebido</span></div>
+          <div class="anim-line" style="animation-delay:0.5s"><span class="key">POST</span> /api/pedidos</div>
+          <div class="anim-line" style="animation-delay:0.8s">{</div>
+          <div class="anim-line" style="animation-delay:1.1s">  <span class="str">"loja"</span>: <span class="str">"sua-loja"</span>,</div>
+          <div class="anim-line" style="animation-delay:1.4s">  <span class="str">"cliente"</span>: <span class="str">"Maria"</span>,</div>
+          <div class="anim-line" style="animation-delay:1.7s">  <span class="str">"total"</span>: <span class="num">47.90</span>,</div>
+          <div class="anim-line" style="animation-delay:2.0s">  <span class="str">"status"</span>: <span class="str">"novo"</span></div>
+          <div class="anim-line" style="animation-delay:2.3s">}</div>
+          <div class="anim-line" style="animation-delay:2.8s"><span class="cmt">// Notificação enviada ao painel ✓</span></div>
+        </div>
+      </div>
+
+      <!-- Mock screen -->
+      <div class="mock-screen">
+        <div class="mock-bar">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <span style="font-size:12px;color:var(--ink-soft);margin-left:8px;">Painel do Lojista</span>
+        </div>
+        <div class="mock-content">
+          <div class="mock-row">
+            <div class="mock-img"></div>
+            <div class="mock-info">
+              <strong>X-Burguer Especial</strong>
+              <span>R$ 28,90 · Ativo</span>
+            </div>
+            <span class="mock-badge">Novo</span>
+          </div>
+          <div class="mock-row">
+            <div class="mock-img" style="background:linear-gradient(135deg,#FECACA,#F87171)"></div>
+            <div class="mock-info">
+              <strong>Combo Família</strong>
+              <span>R$ 59,90 · Ativo</span>
+            </div>
+          </div>
+          <div class="mock-row">
+            <div class="mock-img" style="background:linear-gradient(135deg,#BBF7D0,#4ADE80)"></div>
+            <div class="mock-info">
+              <strong>Suco Natural 500ml</strong>
+              <span>R$ 9,90 · Ativo</span>
+            </div>
+          </div>
+          <div style="margin-top:12px;font-size:12px;color:var(--ink-soft);text-align:center;">
+            Produtos, horários, frete e pedidos — tudo no painel
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DEMONSTRAÇÃO INTERNA ========== -->
+  <div class="demo-section" id="demo">
+    <div class="demo-inner">
+      <div class="section-label">Experimente</div>
+      <h2 class="section-title">Demonstração visual do painel</h2>
+      <p class="section-sub" style="margin-bottom:20px;">
+        Brinque com o painel abaixo. As informações ficam salvas só no seu navegador (localStorage).
+      </p>
+
+      <div class="aviso-demo">
+        <span style="font-size:22px;line-height:1;">⚠️</span>
+        <div>
+          <strong>ESTA É UMA DEMONSTRAÇÃO VISUAL</strong>
+          Nem todas as funções funcionam em tempo real. A plataforma real é completa, operante e com APIs de verdade.
+        </div>
+      </div>
+
+      <div class="demo-painel">
+        <div class="demo-topo">
+          <div>
+            <h2 id="demoNomeLoja">Minha Loja Demo</h2>
+            <p>Painel de demonstração · dados locais</p>
+          </div>
+          <span class="demo-badge">DEMO</span>
+        </div>
+
+        <div class="demo-abas">
+          <button class="demo-aba ativa" data-secao="loja">Minha Loja</button>
+          <button class="demo-aba" data-secao="produtos">Produtos</button>
+          <button class="demo-aba" data-secao="horarios">Horários</button>
+          <button class="demo-aba" data-secao="preview">Visão do cliente</button>
+        </div>
+
+        <div class="demo-body">
+          <!-- SEÇÃO LOJA -->
+          <div class="demo-secao ativa" id="secao-loja">
+            <div class="demo-bloco">
+              <h3>Dados da loja</h3>
+              <p class="sub">Essas informações aparecem no seu site privado.</p>
+              <label class="demo-label">Nome da loja</label>
+              <input type="text" class="demo-input" id="inputNome" placeholder="Ex: Burger da Praia" value="Minha Loja Demo">
+              <label class="demo-label">Descrição curta</label>
+              <textarea class="demo-textarea" id="inputDesc" placeholder="Ex: Os melhores lanches da região">Os melhores lanches da região. Delivery rápido.</textarea>
+              <div class="demo-grid-2">
+                <div>
+                  <label class="demo-label">WhatsApp (pedidos)</label>
+                  <input type="text" class="demo-input" id="inputWhats" placeholder="21999999999" value="21999999999">
+                </div>
+                <div>
+                  <label class="demo-label">Cor principal</label>
+                  <input type="color" class="demo-input" id="inputCor" value="#2F6B4F" style="height:42px;padding:4px;">
+                </div>
+              </div>
+              <button class="demo-btn demo-btn-primario demo-btn-bloco" onclick="salvarLoja()">Salvar dados da loja</button>
+            </div>
+          </div>
+
+          <!-- SEÇÃO PRODUTOS -->
+          <div class="demo-secao" id="secao-produtos">
+            <div class="demo-bloco">
+              <h3>Adicionar produto</h3>
+              <p class="sub">Os produtos ficam salvos apenas no seu navegador.</p>
+              <label class="demo-label">Nome do produto</label>
+              <input type="text" class="demo-input" id="prodNome" placeholder="Ex: X-Burguer">
+              <div class="demo-grid-2">
+                <div>
+                  <label class="demo-label">Preço (R$)</label>
+                  <input type="number" class="demo-input" id="prodPreco" placeholder="28.90" step="0.01" min="0">
+                </div>
+                <div>
+                  <label class="demo-label">Categoria</label>
+                  <select class="demo-select" id="prodCat">
+                    <option>Lanches</option>
+                    <option>Bebidas</option>
+                    <option>Combos</option>
+                    <option>Sobremesas</option>
+                  </select>
+                </div>
+              </div>
+              <button class="demo-btn demo-btn-primario demo-btn-bloco" onclick="adicionarProduto()">Adicionar produto</button>
+            </div>
+            <div class="demo-bloco">
+              <h3>Produtos cadastrados</h3>
+              <p class="sub">Clique no lixeira para remover.</p>
+              <div id="listaProdutos"></div>
+            </div>
+          </div>
+
+          <!-- SEÇÃO HORÁRIOS -->
+          <div class="demo-secao" id="secao-horarios">
+            <div class="demo-bloco">
+              <h3>Horário de funcionamento</h3>
+              <p class="sub">Defina quando sua loja recebe pedidos.</p>
+              <div id="listaHorarios"></div>
+              <button class="demo-btn demo-btn-primario demo-btn-bloco" onclick="salvarHorarios()">Salvar horários</button>
+            </div>
+          </div>
+
+          <!-- SEÇÃO PREVIEW -->
+          <div class="demo-secao" id="secao-preview">
+            <div class="demo-bloco">
+              <h3>Como o cliente da sua loja vai ver</h3>
+              <p class="sub">Prévia do site privado — a mesma tela que o cliente abre (ou instala como app).</p>
+              <div class="preview-loja" id="previewLoja">
+                <div class="preview-header" id="previewHeader">
+                  <h4 id="previewNome">Minha Loja Demo</h4>
+                  <p id="previewDesc">Os melhores lanches da região. Delivery rápido.</p>
+                </div>
+                <div class="preview-produtos" id="previewProdutos">
+                  <!-- preenchido via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== CONTATO ========== -->
+  <section class="contato-section" id="contato">
+    <div class="section-label">Contato</div>
+    <h2 class="section-title">Pronto para ter seu site?</h2>
+    <p class="section-sub" style="margin-left:auto;margin-right:auto;">
+      Fale com a gente no WhatsApp. Tiramos suas dúvidas e ativamos seu site privado.
+    </p>
+
+    <div class="whatsapp-btns">
+      <!-- 
+        NÚMEROS DE CONTATO:
+        Botão 1 → Meu número: +55 21 99332-3330
+        Botão 2 → Número da irmã: +55 21 98357-2897
+        Podemos ajustar esses números depois se precisar.
+      -->
+      <a class="btn-whatsapp" href="https://wa.me/5521993323330?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20site%20privado%20por%20R%24%2029%2C90%2Fm%C3%AAs" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <div>
+          Falar comigo
+          <small>(21) 99332-3330</small>
+        </div>
+      </a>
+      <a class="btn-whatsapp" href="https://wa.me/5521983572897?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20site%20privado%20por%20R%24%2029%2C90%2Fm%C3%AAs" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <div>
+          Falar com a equipe
+          <small>(21) 98357-2897</small>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <strong>CG Delivery</strong> · Site Privado para Lojistas · R$ 29,90/mês<br>
+    Plataforma completa · PWA · Não é apenas visual
+  </footer>
+
+  <div class="demo-toast" id="toast"></div>
+
+  <script>
+    // ===== DADOS LOCAIS (localStorage) =====
+    const STORAGE_KEY = 'cg_demo_loja';
+
+    function getData() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || getDefault();
+      } catch {
+        return getDefault();
+      }
+    }
+    function getDefault() {
+      return {
+        nome: 'Minha Loja Demo',
+        desc: 'Os melhores lanches da região. Delivery rápido.',
+        whats: '21999999999',
+        cor: '#2F6B4F',
+        produtos: [
+          { id: 1, nome: 'X-Burguer Especial', preco: 28.90, cat: 'Lanches' },
+          { id: 2, nome: 'Combo Família', preco: 59.90, cat: 'Combos' },
+          { id: 3, nome: 'Suco Natural 500ml', preco: 9.90, cat: 'Bebidas' }
+        ],
+        horarios: [
+          { dia: 'Segunda', aberto: true, inicio: '18:00', fim: '23:00' },
+          { dia: 'Terça', aberto: true, inicio: '18:00', fim: '23:00' },
+          { dia: 'Quarta', aberto: true, inicio: '18:00', fim: '23:00' },
+          { dia: 'Quinta', aberto: true, inicio: '18:00', fim: '23:00' },
+          { dia: 'Sexta', aberto: true, inicio: '18:00', fim: '00:00' },
+          { dia: 'Sábado', aberto: true, inicio: '18:00', fim: '00:00' },
+          { dia: 'Domingo', aberto: false, inicio: '18:00', fim: '23:00' }
+        ]
+      };
+    }
+    function saveData(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function toast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 2200);
+    }
+
+    // ===== ABAS =====
+    document.querySelectorAll('.demo-aba').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.demo-aba').forEach(b => b.classList.remove('ativa'));
+        document.querySelectorAll('.demo-secao').forEach(s => s.classList.remove('ativa'));
+        btn.classList.add('ativa');
+        document.getElementById('secao-' + btn.dataset.secao).classList.add('ativa');
+        if (btn.dataset.secao === 'preview') renderPreview();
+        if (btn.dataset.secao === 'produtos') renderProdutos();
+        if (btn.dataset.secao === 'horarios') renderHorarios();
+      });
+    });
+
+    // ===== LOJA =====
+    function carregarLoja() {
+      const d = getData();
+      document.getElementById('inputNome').value = d.nome;
+      document.getElementById('inputDesc').value = d.desc;
+      document.getElementById('inputWhats').value = d.whats;
+      document.getElementById('inputCor').value = d.cor;
+      document.getElementById('demoNomeLoja').textContent = d.nome;
+    }
+    function salvarLoja() {
+      const d = getData();
+      d.nome = document.getElementById('inputNome').value.trim() || 'Minha Loja';
+      d.desc = document.getElementById('inputDesc').value.trim();
+      d.whats = document.getElementById('inputWhats').value.trim();
+      d.cor = document.getElementById('inputCor').value;
+      saveData(d);
+      document.getElementById('demoNomeLoja').textContent = d.nome;
+      toast('Dados da loja salvos ✓');
+    }
+
+    // ===== PRODUTOS =====
+    function renderProdutos() {
+      const d = getData();
+      const lista = document.getElementById('listaProdutos');
+      if (!d.produtos.length) {
+        lista.innerHTML = '<p style="font-size:13px;color:var(--ink-soft);">Nenhum produto ainda. Adicione o primeiro!</p>';
+        return;
+      }
+      lista.innerHTML = d.produtos.map(p => `
+        <div class="demo-produto">
+          <div class="placeholder-img"></div>
+          <div class="demo-produto-info">
+            <div class="nome">${esc(p.nome)}</div>
+            <div class="detalhe">R$ ${p.preco.toFixed(2).replace('.',',')} · ${esc(p.cat)}</div>
+          </div>
+          <div class="demo-acoes">
+            <button class="demo-icone" onclick="removerProduto(${p.id})" title="Remover">🗑</button>
+          </div>
+        </div>
+      `).join('');
+    }
+    function adicionarProduto() {
+      const nome = document.getElementById('prodNome').value.trim();
+      const preco = parseFloat(document.getElementById('prodPreco').value);
+      const cat = document.getElementById('prodCat').value;
+      if (!nome || isNaN(preco) || preco < 0) {
+        toast('Preencha nome e preço válidos');
+        return;
+      }
+      const d = getData();
+      d.produtos.push({ id: Date.now(), nome, preco, cat });
+      saveData(d);
+      document.getElementById('prodNome').value = '';
+      document.getElementById('prodPreco').value = '';
+      renderProdutos();
+      toast('Produto adicionado ✓');
+    }
+    function removerProduto(id) {
+      const d = getData();
+      d.produtos = d.produtos.filter(p => p.id !== id);
+      saveData(d);
+      renderProdutos();
+      toast('Produto removido');
+    }
+
+    // ===== HORÁRIOS =====
+    function renderHorarios() {
+      const d = getData();
+      const cont = document.getElementById('listaHorarios');
+      cont.innerHTML = d.horarios.map((h, i) => `
+        <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);">
+          <span style="width:70px;font-weight:600;font-size:13px;">${h.dia}</span>
+          <input type="time" class="demo-input" style="width:90px;padding:7px 8px;" value="${h.inicio}" data-i="${i}" data-f="inicio">
+          <span style="font-size:12px;color:var(--ink-soft);">até</span>
+          <input type="time" class="demo-input" style="width:90px;padding:7px 8px;" value="${h.fim}" data-i="${i}" data-f="fim">
+          <label style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer;">
+            <input type="checkbox" ${h.aberto ? 'checked' : ''} data-i="${i}" class="chk-aberto"> Aberto
+          </label>
+        </div>
+      `).join('');
+    }
+    function salvarHorarios() {
+      const d = getData();
+      document.querySelectorAll('#listaHorarios input[type=time]').forEach(inp => {
+        const i = +inp.dataset.i;
+        d.horarios[i][inp.dataset.f] = inp.value;
+      });
+      document.querySelectorAll('#listaHorarios .chk-aberto').forEach(chk => {
+        d.horarios[+chk.dataset.i].aberto = chk.checked;
+      });
+      saveData(d);
+      toast('Horários salvos ✓');
+    }
+
+    // ===== PREVIEW =====
+    function renderPreview() {
+      const d = getData();
+      document.getElementById('previewNome').textContent = d.nome;
+      document.getElementById('previewDesc').textContent = d.desc;
+      document.getElementById('previewHeader').style.background = `linear-gradient(135deg, ${d.cor}, ${ajustarCor(d.cor, 20)})`;
+      const cont = document.getElementById('previewProdutos');
+      if (!d.produtos.length) {
+        cont.innerHTML = '<p style="text-align:center;color:var(--ink-soft);font-size:13px;padding:20px;">Nenhum produto cadastrado</p>';
+        return;
+      }
+      cont.innerHTML = d.produtos.map(p => `
+        <div class="preview-item">
+          <div class="img" style="background:linear-gradient(135deg, ${d.cor}33, ${d.cor}88)"></div>
+          <div>
+            <strong>${esc(p.nome)}</strong>
+            <span>${esc(p.cat)}</span>
+            <div class="preco">R$ ${p.preco.toFixed(2).replace('.',',')}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+    function ajustarCor(hex, percent) {
+      // simplificado: só retorna uma variação clara
+      return hex;
+    }
+    function esc(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    // ===== INIT =====
+    carregarLoja();
+    renderProdutos();
+    renderHorarios();
+
+    // Reinicia animação do código quando a seção entra em view (simples)
+    const codeEl = document.getElementById('codeAnim');
+    if (codeEl) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          codeEl.querySelectorAll('.anim-line').forEach(el => {
+            el.style.animation = 'none';
+            el.offsetHeight;
+            el.style.animation = null;
+          });
+        }
+      }, { threshold: 0.3 });
+      observer.observe(codeEl);
+    }
+  </script>
+</body>
+</html>

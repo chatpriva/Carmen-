@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CG Soluções Gráficas — Design, Artes e Soluções Digitais</title>
+  <meta name="description" content="CG Soluções Gráficas: design premium e soluções digitais para o seu negócio. Conheça o CG Delivery — site privado para lojistas.">
+  <meta name="theme-color" content="#08070a">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black-deep: #08070a;
+      --black-soft: #121114;
+      --black-card: #1a1a1e;
+      --gold-light: #f8e9ac;
+      --gold: #d4af37;
+      --gold-solid: linear-gradient(135deg, #b8912a 0%, #f4e2a1 45%, #c89a2e 100%);
+      --gold-btn: linear-gradient(135deg, #a67c1c 0%, #f6e29d 50%, #a67c1c 100%);
+      --text-light: #f3efe4;
+      --text-light-70: rgba(243,239,228,.7);
+      --shadow-gold: 0 10px 30px -8px rgba(212,175,55,.45);
+      --ease: cubic-bezier(.22,.61,.36,1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: var(--black-deep);
+      color: var(--text-light);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    h1,h2,h3 { font-family: 'Playfair Display', serif; font-weight: 700; }
+
+    .texture-bg {
+      position: fixed; inset: 0; z-index: -2;
+      background:
+        radial-gradient(ellipse 900px 500px at 15% -10%, rgba(212,175,55,.10), transparent 60%),
+        radial-gradient(ellipse 700px 500px at 110% 20%, rgba(212,175,55,.08), transparent 60%),
+        radial-gradient(ellipse 900px 600px at 50% 120%, rgba(212,175,55,.07), transparent 60%),
+        #08070a;
+    }
+
+    /* Header */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 0;
+      transition: background .35s, border-color .35s, padding .35s;
+      border-bottom: 1px solid transparent;
+    }
+    .header.scrolled {
+      padding: 10px 0;
+      background: rgba(8,7,10,.78);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(212,175,55,.25);
+    }
+    .container {
+      width: 100%; max-width: 1100px;
+      margin: 0 auto; padding: 0 24px;
+    }
+    .header .container {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { width: 40px; height: 40px; object-fit: contain; }
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; letter-spacing: .3px;
+    }
+    .brand-name b { color: var(--gold-light); }
+    .brand-tag {
+      display: block;
+      font-family: 'Poppins', sans-serif;
+      font-size: .55rem; letter-spacing: 2.5px;
+      color: var(--text-light-70); text-transform: uppercase; margin-top: -2px;
+    }
+    .header-cta .btn { padding: 11px 22px; font-size: .85rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 28px; border-radius: 100px;
+      font-weight: 700; font-size: .95rem;
+      cursor: pointer; border: none;
+      transition: transform .3s var(--ease), box-shadow .3s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-gold {
+      background: var(--gold-btn); color: #201703;
+      box-shadow: var(--shadow-gold);
+    }
+    .btn-gold:hover { box-shadow: 0 14px 36px -8px rgba(212,175,55,.55); }
+    .btn-outline {
+      background: transparent; color: var(--gold-light);
+      border: 1.5px solid rgba(212,175,55,.5);
+    }
+    .btn-outline:hover { background: rgba(212,175,55,.12); }
+    .btn-block { width: 100%; }
+
+    /* Hero */
+    .hero {
+      min-height: 88vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 60px;
+      position: relative;
+    }
+    .hero-glow {
+      position: absolute; top: 5%; left: 50%; transform: translateX(-50%);
+      width: 560px; height: 560px;
+      background: radial-gradient(circle, rgba(212,175,55,.2), transparent 65%);
+      filter: blur(8px); pointer-events: none;
+    }
+    .hero-logo {
+      width: 120px; height: 120px; margin: 0 auto 20px;
+      filter: drop-shadow(0 8px 28px rgba(212,175,55,.4));
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .hero-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      margin-bottom: 6px;
+    }
+    .hero-brand span { color: var(--gold-light); }
+    .hero-sub {
+      font-size: .7rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--text-light-70); margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      line-height: 1.1;
+      background: var(--gold-solid);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin-bottom: 18px;
+    }
+    .hero .lead {
+      max-width: 520px; margin: 0 auto 36px;
+      color: var(--text-light-70); font-size: 1.05rem;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    }
+
+    /* Section */
+    section { padding: 80px 0; position: relative; }
+    .section-head { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .75rem; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold-light); margin-bottom: 14px;
+    }
+    .eyebrow::before {
+      content: ''; width: 28px; height: 1px; background: var(--gold);
+    }
+    .section-head h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      background: var(--gold-solid);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin-bottom: 12px;
+    }
+    .section-head p { color: var(--text-light-70); }
+
+    /* Product card */
+    .product-wrap {
+      max-width: 480px; margin: 0 auto;
+    }
+    .product-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+      border: 1px solid rgba(212,175,55,.35);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -20px rgba(0,0,0,.5), var(--shadow-gold);
+      transition: transform .4s var(--ease), border-color .3s;
+      cursor: pointer;
+      display: block;
+      color: inherit;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(212,175,55,.65);
+    }
+    .product-img-wrap {
+      background: radial-gradient(circle at 50% 40%, #1a1a2e 0%, #0a0a0f 70%);
+      padding: 40px 24px 28px;
+      display: flex; justify-content: center; align-items: center;
+      position: relative;
+    }
+    .product-img-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(67,56,202,.25), transparent 60%);
+      pointer-events: none;
+    }
+    .product-img {
+      width: 160px; height: 160px;
+      border-radius: 28px;
+      object-fit: cover;
+      box-shadow: 0 16px 40px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08);
+      position: relative; z-index: 1;
+    }
+    .product-body {
+      padding: 28px 28px 32px;
+      text-align: center;
+    }
+    .product-badge {
+      display: inline-block;
+      font-size: .68rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #201703;
+      background: var(--gold-solid);
+      padding: 5px 12px; border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .product-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.65rem;
+      margin-bottom: 10px;
+      color: var(--text-light);
+    }
+    .product-body .desc {
+      color: var(--text-light-70);
+      font-size: .95rem;
+      margin-bottom: 20px;
+      line-height: 1.55;
+    }
+    .product-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      background: var(--gold-solid);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin-bottom: 6px;
+    }
+    .product-price span {
+      font-family: 'Poppins', sans-serif;
+      font-size: .85rem;
+      -webkit-text-fill-color: var(--text-light-70);
+      font-weight: 500;
+    }
+    .product-note {
+      font-size: .8rem;
+      color: var(--text-light-70);
+      margin-bottom: 22px;
+    }
+    .product-features {
+      list-style: none;
+      text-align: left;
+      margin: 0 auto 24px;
+      max-width: 300px;
+    }
+    .product-features li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .88rem;
+      color: var(--text-light-70);
+      margin-bottom: 8px;
+    }
+    .product-features li::before {
+      content: '✦';
+      color: var(--gold-light);
+      font-size: .7rem;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Contact */
+    .contact-section {
+      text-align: center;
+      padding-bottom: 100px;
+    }
+    .wa-btns {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;
+      margin-top: 28px;
+    }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #25D366; color: #fff;
+      padding: 15px 24px; border-radius: 14px;
+      font-weight: 700; font-size: .95rem;
+      box-shadow: 0 4px 16px rgba(37,211,102,.3);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-wa:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(37,211,102,.4);
+    }
+    .btn-wa svg { width: 22px; height: 22px; fill: currentColor; }
+    .btn-wa small {
+      display: block; font-size: .7rem; font-weight: 500; opacity: .9;
+    }
+
+    /* Footer */
+    footer {
+      background: #000;
+      border-top: 1px solid rgba(212,175,55,.3);
+      padding: 36px 24px;
+      text-align: center;
+      font-size: .85rem;
+      color: var(--text-light-70);
+    }
+    footer strong { color: var(--gold-light); }
+
+    /* Float WA */
+    .wa-float {
+      position: fixed; bottom: 24px; right: 24px;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--gold-btn);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-gold);
+      z-index: 90;
+      transition: transform .3s;
+    }
+    .wa-float:hover { transform: scale(1.08); }
+    .wa-float svg { width: 28px; height: 28px; fill: #1c1608; }
+
+    @media (max-width: 560px) {
+      .hero { padding-top: 110px; min-height: auto; padding-bottom: 48px; }
+      .product-body { padding: 22px 20px 28px; }
+      .wa-btns { flex-direction: column; align-items: stretch; }
+      .btn-wa { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="texture-bg" aria-hidden="true"></div>
+
+  <header class="header" id="header">
+    <div class="container">
+      <a href="#" class="brand">
+        <img src="logo.png" alt="CG Soluções Gráficas">
+        <div>
+          <div class="brand-name">CG <b>Soluções</b></div>
+          <span class="brand-tag">Design &amp; Artes</span>
+        </div>
+      </a>
+      <div class="header-cta">
+        <a class="btn btn-gold" href="#produto">Ver produto</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div>
+      <img class="hero-logo" src="logo.png" alt="Logo CG">
+      <div class="hero-brand">CG <span>Soluções Gráficas</span></div>
+      <div class="hero-sub">Design · Artes · Soluções digitais</div>
+      <h1>Soluções premium<br>para o seu negócio</h1>
+      <p class="lead">
+        Design com identidade forte e ferramentas digitais que vendem.
+        Conheça nosso produto para lojistas.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#produto">Conhecer CG Delivery</a>
+        <a class="btn btn-outline" href="#contato">Falar no WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="produto">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Nosso produto</span>
+        <h2>CG Delivery</h2>
+        <p>Site privado completo para a sua loja — painel, pedidos e app instalável.</p>
+      </div>
+
+      <div class="product-wrap">
+        <a class="product-card" href="delivery.html">
+          <div class="product-img-wrap">
+            <img class="product-img" src="cg-delivery-icon.png" alt="CG Delivery — ícone do app">
+          </div>
+          <div class="product-body">
+            <span class="product-badge">Disponível agora</span>
+            <h3>CG Delivery</h3>
+            <p class="desc">
+              Site privado exclusivo da sua loja, com painel de controle completo.
+              Seus clientes pedem pelo site ou instalam como aplicativo no celular (PWA) — com um clique.
+            </p>
+            <div class="product-price">R$ 29,90 <span>/mês</span></div>
+            <p class="product-note">Sem comissão por pedido · Sem taxa extra</p>
+            <ul class="product-features">
+              <li>Site privado só da sua loja</li>
+              <li>Painel para produtos, horários e pedidos</li>
+              <li>App PWA para o cliente (instala com 1 clique)</li>
+              <li>Painel do lojista também instalável</li>
+            </ul>
+            <span class="btn btn-gold btn-block">Ver detalhes do produto →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contato">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Contato</span>
+        <h2>Fale com a CG</h2>
+        <p>Dúvidas sobre o CG Delivery ou outros serviços? Chama no WhatsApp.</p>
+      </div>
+      <div class="wa-btns">
+        <a class="btn-wa" href="https://wa.me/5521993323330?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20CG%20Delivery" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <div>Falar comigo<small>(21) 99332-3330</small></div>
+        </a>
+        <a class="btn-wa" href="https://wa.me/5521983572897?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20CG%20Delivery" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <div>Falar com a equipe<small>(21) 98357-2897</small></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>CG Soluções Gráficas</strong> · Design, artes e soluções digitais<br>
+    © <span id="year"></span> · Feito com dedicação e dourado ✦
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/5521993323330?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20CG%20Delivery" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32"><path d="M16 3C9 3 3.3 8.6 3.3 15.5c0 2.5.7 4.9 2 7L3 29l6.7-2.2c2 1.1 4.2 1.7 6.4 1.7 7 0 12.7-5.6 12.7-12.5S23 3 16 3zm0 22.7c-2 0-4-.5-5.7-1.6l-.4-.2-4 1.3 1.3-3.9-.3-.4a10.2 10.2 0 0 1-1.7-5.4C5.2 9.8 10 5.3 16 5.3s10.8 4.5 10.8 10.2S22 25.7 16 25.7zm5.9-7.6c-.3-.2-1.9-1-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.7 8.7 0 0 1-2.6-1.6 9.6 9.6 0 0 1-1.8-2.2c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5s0-.4 0-.5c0-.2-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.5 3.5 0 0 0-1.1 2.6c0 1.5 1.1 3 1.3 3.2s2.2 3.4 5.3 4.7a17.9 17.9 0 0 0 1.8.7 4.3 4.3 0 0 0 2 .1 3.2 3.2 0 0 0 2.1-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.4z"/></svg>
+  </a>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    var header = document.getElementById('header');
+    window.addEventListener('scroll', function () {
+      header.classList.toggle('scrolled', window.scrollY > 30);
+    }, { passive: true });
+  </script>
+</body>
+</html>
